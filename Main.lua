@@ -2,7 +2,7 @@
     LadyCelestia 7/22/2023
     Scripted for the use of Solar and Robloxian Tower Defense
     
-    Advanced dynamic data storing system
+    Dynamic data storing system
     Uses modified berezaa DS2 method (50 backup purge)
     
     module.ForceGet(Number userId) - YIELDS. Get player data without registering player. Returns Tuple data (may be {} in case of http exception or target player having no previously saved data)
@@ -42,9 +42,15 @@ local function DeepCopy(original)
 
 		copy[i] = v
 	end
-
-	return setmetatable(copy, getmetatable(original))
-
+	
+	if getmetatable(original) ~= nil then
+		return setmetatable(copy, getmetatable(original))
+		
+	else
+		return copy
+		
+	end
+	
 end
 
 module.ForceGet = function(userId)
